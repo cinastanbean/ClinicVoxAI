@@ -1,0 +1,14 @@
+scenario,utterance,expected_intent,expected_handoff
+schedule,I want to schedule an appointment,schedule,none
+schedule,My first name is Jane,,
+schedule,My last name is Doe,,
+schedule,My date of birth is 1990-01-01,,
+schedule,Wednesday morning works,,
+report_unverified,I want my lab results,report,none
+verification_failure,I want my lab results,report,verification_failed
+verification_failure,My date of birth is 1970-01-01,,
+verification_failure,My date of birth is 1970-01-01,,
+intent_switch,I want to schedule an appointment,schedule,none
+intent_switch,My first name is Jane,,
+intent_switch,Actually I want my lab results,report,none
+intent_switch,My date of birth is 1990-01-01,,

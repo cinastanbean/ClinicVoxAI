@@ -1,0 +1,35 @@
+{"event": "turn", "payload": {"text": "I want to schedule an appointment", "response": "Please tell me your first name, last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My first name is Jane", "response": "I want to make sure I understood. Are you calling to schedule, change, or discuss a report?"}}
+{"event": "turn", "payload": {"text": "My last name is Doe", "response": "I want to make sure I understood. Are you calling to schedule, change, or discuss a report?"}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I want to make sure I understood. Are you calling to schedule, change, or discuss a report?"}}
+{"event": "turn", "payload": {"text": "Wednesday morning works", "response": "I want to make sure I understood. Are you calling to schedule, change, or discuss a report?"}}
+{"event": "turn", "payload": {"text": "Actually I want my lab results", "response": "Please provide your date of birth so I can verify your identity."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I want to make sure I understood. Are you calling to schedule, change, or discuss a report?"}}
+{"event": "turn", "payload": {"text": "I want to schedule an appointment", "response": "Please tell me your first name, last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My first name is Jane", "response": "Please tell me your last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My last name is Doe", "response": "Please tell me your date of birth."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"}}
+{"event": "turn", "payload": {"text": "Wednesday morning works", "response": "You're all set. I have confirmed your appointment and sent a text message."}}
+{"event": "turn", "payload": {"text": "Actually I want my lab results", "response": "I could not find a report. Would you like to speak with a person?"}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I could not find a report. Would you like to speak with a person?"}}
+{"event": "turn", "payload": {"text": "I want to schedule an appointment", "response": "Please tell me your first name, last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My first name is Jane", "response": "Please tell me your last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My last name is Doe", "response": "Please tell me your date of birth."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"}}
+{"event": "turn", "payload": {"text": "Wednesday morning works", "response": "You're all set. I have confirmed your appointment and sent a text message."}}
+{"event": "turn", "payload": {"text": "Actually I want my lab results", "response": "I could not find a report. Would you like to speak with a person?"}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I could not find a report. Would you like to speak with a person?"}}
+{"event": "turn", "payload": {"text": "I want to schedule an appointment", "response": "Please tell me your first name, last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My first name is Jane", "response": "Please tell me your last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My last name is Doe", "response": "Please tell me your date of birth."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"}}
+{"event": "turn", "payload": {"text": "Wednesday morning works", "response": "You're all set. I have confirmed your appointment and sent a text message."}}
+{"event": "turn", "payload": {"text": "Actually I want my lab results", "response": "Here is a plain-language summary: Summary: Impression: Mild degenerative changes in L4-L5. No acute findings. If you want advice, I can connect you to a clinician."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "Here is a plain-language summary: Summary: Impression: Mild degenerative changes in L4-L5. No acute findings. If you want advice, I can connect you to a clinician."}}
+{"event": "turn", "payload": {"text": "I want to schedule an appointment", "response": "Please tell me your first name, last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My first name is Jane", "response": "Please tell me your last name, date of birth."}}
+{"event": "turn", "payload": {"text": "My last name is Doe", "response": "Please tell me your date of birth."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"}}
+{"event": "turn", "payload": {"text": "Wednesday morning works", "response": "You're all set. I have confirmed your appointment and sent a text message."}}
+{"event": "turn", "payload": {"text": "Actually I want my lab results", "response": "Here is a plain-language summary: Summary: Impression: Mild degenerative changes in L4-L5. No acute findings. If you want advice, I can connect you to a clinician."}}
+{"event": "turn", "payload": {"text": "My date of birth is [REDACTED_DOB]", "response": "Here is a plain-language summary: Summary: Impression: Mild degenerative changes in L4-L5. No acute findings. If you want advice, I can connect you to a clinician."}}

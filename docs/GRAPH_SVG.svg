@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300">
+  <style>
+    .box { fill: #f7f7f7; stroke: #222; stroke-width: 1.5; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; fill: #111; }
+    .arrow { stroke: #111; stroke-width: 1.5; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111" />
+    </marker>
+  </defs>
+
+  <rect class="box" x="20" y="120" width="80" height="40" rx="6" />
+  <text class="label" x="60" y="145" text-anchor="middle">START</text>
+
+  <rect class="box" x="140" y="90" width="140" height="40" rx="6" />
+  <text class="label" x="210" y="115" text-anchor="middle">Router Agent</text>
+
+  <rect class="box" x="320" y="90" width="160" height="40" rx="6" />
+  <text class="label" x="400" y="115" text-anchor="middle">Supervisor Agent</text>
+
+  <rect class="box" x="520" y="30" width="120" height="40" rx="6" />
+  <text class="label" x="580" y="55" text-anchor="middle">Clarify</text>
+
+  <rect class="box" x="520" y="90" width="120" height="40" rx="6" />
+  <text class="label" x="580" y="115" text-anchor="middle">Task Agent</text>
+
+  <rect class="box" x="520" y="160" width="120" height="40" rx="6" />
+  <text class="label" x="580" y="185" text-anchor="middle">Handoff</text>
+
+  <rect class="box" x="700" y="90" width="80" height="40" rx="6" />
+  <text class="label" x="740" y="115" text-anchor="middle">END</text>
+
+  <line class="arrow" x1="100" y1="140" x2="140" y2="110" />
+  <line class="arrow" x1="280" y1="110" x2="320" y2="110" />
+
+  <line class="arrow" x1="480" y1="110" x2="520" y2="110" />
+  <line class="arrow" x1="480" y1="110" x2="520" y2="50" />
+  <line class="arrow" x1="480" y1="110" x2="520" y2="180" />
+
+  <line class="arrow" x1="640" y1="110" x2="700" y2="110" />
+  <line class="arrow" x1="640" y1="50" x2="140" y2="110" />
+  <line class="arrow" x1="640" y1="180" x2="700" y2="110" />
+
+  <text class="label" x="500" y="80">proceed</text>
+  <text class="label" x="500" y="40">clarify</text>
+  <text class="label" x="500" y="170">handoff</text>
+</svg>

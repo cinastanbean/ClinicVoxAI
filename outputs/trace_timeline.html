@@ -1,0 +1,29 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Trace Timeline</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { font-size: 20px; }
+    .lane { margin: 10px 0; }
+    .lane-title { font-weight: bold; margin-bottom: 6px; }
+    .event { display: inline-block; margin: 4px; padding: 6px 8px; border-radius: 6px; background: #f2f2f2; font-size: 12px; }
+    .router { background: #d7e6ff; }
+    .supervisor { background: #ffe1c6; }
+    .task { background: #d7f5d7; }
+    .hook { background: #f6f0c1; }
+    .diff { background: #e6f7ef; }
+    .merge { background: #ffd8d8; }
+    .langgraph { background: #cfe6ff; border: 2px solid #1e66ff; }
+  </style>
+</head>
+<body>
+  <h1>Trace Timeline</h1>
+  <div class="lane"><div class="lane-title">Task</div><span class="event task">task_response</span><span class="event task">task_response</span><span class="event task">task_response</span><span class="event task">task_response</span><span class="event task">task_response</span><span class="event task">task_response</span></div>
+<div class="lane"><div class="lane-title">Diffs</div><span class="event diff">diff:langgraph</span><span class="event diff">diff:langgraph</span><span class="event diff">diff:langgraph</span><span class="event diff">diff:langgraph</span><span class="event diff">diff:langgraph</span><span class="event diff">diff:langgraph</span></div>
+<div class="lane"><div class="lane-title">LangGraph</div><span class="event langgraph">langgraph 1.394ms</span><span class="event langgraph">langgraph 0.884ms</span><span class="event langgraph">langgraph 0.777ms</span><span class="event langgraph">langgraph 2.08ms</span><span class="event langgraph">langgraph 1.164ms</span><span class="event langgraph">langgraph 0.752ms</span></div>
+<div class="lane"><div class="lane-title">Other</div><span class="event ">turn_start</span><span class="event ">turn_start</span><span class="event ">turn_start</span><span class="event ">turn_start</span><span class="event ">turn_start</span><span class="event ">turn_start</span></div>
+</body>
+</html>

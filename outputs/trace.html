@@ -1,0 +1,520 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Agent Trace</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { font-size: 20px; }
+    pre { background: #f6f6f6; padding: 10px; white-space: pre-wrap; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 6px; font-size: 12px; vertical-align: top; }
+    th { background: #f0f0f0; }
+    .event-turn { background: #eef; }
+    .event-diff { background: #efe; }
+    .event-merge { background: #fee; }
+    .event-hook { background: #f9f4d0; }
+    .tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+    .tag-turn { background: #cbd8ff; }
+    .tag-diff { background: #cbeed3; }
+    .tag-merge { background: #f4c6c6; }
+    .tag-hook { background: #f0e2a6; }
+  </style>
+</head>
+<body>
+  <h1>Trace Events</h1>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Event</th><th>Payload</th></tr>
+    </thead>
+    <tbody>
+      <tr class="event-turn"><td>1</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 1,
+  "text": "I want to schedule an appointment"
+}</pre></td></tr>
+<tr class=""><td>2</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 1.394
+}</pre></td></tr>
+<tr class="event-diff"><td>3</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "intent": "schedule",
+    "intent_confidence": 0.75,
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "last_agent": "task",
+    "meta": {
+      "text": "I want to schedule an appointment",
+      "decision": "proceed",
+      "last_response": "Please tell me your first name, last name, date of birth."
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>4</td><td>task_response </td><td><pre>{
+  "response": "Please tell me your first name, last name, date of birth."
+}</pre></td></tr>
+<tr class="event-turn"><td>5</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 2,
+  "text": "My first name is Jane"
+}</pre></td></tr>
+<tr class=""><td>6</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 0.884
+}</pre></td></tr>
+<tr class="event-diff"><td>7</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "patient_type": "new",
+    "intent_confidence": 0.6,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": null,
+      "dob": null,
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "meta": {
+      "text": "My first name is Jane",
+      "decision": "proceed",
+      "last_response": "Please tell me your last name, date of birth."
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>8</td><td>task_response </td><td><pre>{
+  "response": "Please tell me your last name, date of birth."
+}</pre></td></tr>
+<tr class="event-turn"><td>9</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 3,
+  "text": "My last name is Doe"
+}</pre></td></tr>
+<tr class=""><td>10</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 0.777
+}</pre></td></tr>
+<tr class="event-diff"><td>11</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "patient_type": "existing",
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": null,
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "meta": {
+      "text": "My last name is Doe",
+      "decision": "proceed",
+      "last_response": "Please tell me your date of birth."
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>12</td><td>task_response </td><td><pre>{
+  "response": "Please tell me your date of birth."
+}</pre></td></tr>
+<tr class="event-turn"><td>13</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 4,
+  "text": "My date of birth is 1990-01-01"
+}</pre></td></tr>
+<tr class=""><td>14</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 2.08
+}</pre></td></tr>
+<tr class="event-diff"><td>15</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "patient_id": "P69505",
+    "patient_type": "unknown",
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": "1990-01-01",
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [
+        "2026-03-12T10:00:00-05:00",
+        "2026-03-12T14:00:00-05:00"
+      ],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "meta": {
+      "text": "My date of birth is 1990-01-01",
+      "decision": "proceed",
+      "last_response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>16</td><td>task_response </td><td><pre>{
+  "response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"
+}</pre></td></tr>
+<tr class="event-turn"><td>17</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 5,
+  "text": "Wednesday morning works"
+}</pre></td></tr>
+<tr class=""><td>18</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 1.164
+}</pre></td></tr>
+<tr class="event-diff"><td>19</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [
+        "2026-03-12T10:00:00-05:00",
+        "2026-03-12T14:00:00-05:00"
+      ],
+      "selected_slot": "2026-03-12T10:00:00-05:00",
+      "appointment_id": "A20636",
+      "version": 1
+    },
+    "meta": {
+      "text": "Wednesday morning works",
+      "decision": "proceed",
+      "last_response": "You're all set. I have confirmed your appointment and sent a text message."
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>20</td><td>task_response </td><td><pre>{
+  "response": "You're all set. I have confirmed your appointment and sent a text message."
+}</pre></td></tr>
+<tr class="event-turn"><td>21</td><td>turn_start <span class="tag tag-turn">turn</span></td><td><pre>{
+  "turn_id": 6,
+  "text": "Actually, can you tell me my lab results?"
+}</pre></td></tr>
+<tr class=""><td>22</td><td>node_duration </td><td><pre>{
+  "agent": "langgraph",
+  "ms": 0.752
+}</pre></td></tr>
+<tr class="event-diff"><td>23</td><td>state_diff <span class="tag tag-diff">diff</span></td><td><pre>{
+  "agent": "langgraph",
+  "diff": {
+    "intent": "report",
+    "intent_confidence": 0.75,
+    "verification_status": "failed",
+    "verification_attempts": 1,
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 2
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 2
+    },
+    "meta": {
+      "text": "Actually, can you tell me my lab results?",
+      "decision": "proceed",
+      "last_response": "Please provide your date of birth so I can verify your identity."
+    }
+  }
+}</pre></td></tr>
+<tr class=""><td>24</td><td>task_response </td><td><pre>{
+  "response": "Please provide your date of birth so I can verify your identity."
+}</pre></td></tr>
+    </tbody>
+  </table>
+
+  <h1>State Snapshots</h1>
+  <pre>[
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 1,
+    "caller_phone": null,
+    "patient_id": null,
+    "patient_type": "unknown",
+    "intent": "schedule",
+    "intent_confidence": 0.75,
+    "verification_status": "unverified",
+    "verification_attempts": 0,
+    "collected_fields": {
+      "first_name": null,
+      "last_name": null,
+      "dob": null,
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "I want to schedule an appointment",
+      "decision": "proceed",
+      "last_response": "Please tell me your first name, last name, date of birth."
+    }
+  },
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 2,
+    "caller_phone": null,
+    "patient_id": null,
+    "patient_type": "new",
+    "intent": "schedule",
+    "intent_confidence": 0.6,
+    "verification_status": "unverified",
+    "verification_attempts": 0,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": null,
+      "dob": null,
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "My first name is Jane",
+      "decision": "proceed",
+      "last_response": "Please tell me your last name, date of birth."
+    }
+  },
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 3,
+    "caller_phone": null,
+    "patient_id": null,
+    "patient_type": "existing",
+    "intent": "schedule",
+    "intent_confidence": 0.6,
+    "verification_status": "unverified",
+    "verification_attempts": 0,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": null,
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "My last name is Doe",
+      "decision": "proceed",
+      "last_response": "Please tell me your date of birth."
+    }
+  },
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 4,
+    "caller_phone": null,
+    "patient_id": "P69505",
+    "patient_type": "unknown",
+    "intent": "schedule",
+    "intent_confidence": 0.6,
+    "verification_status": "unverified",
+    "verification_attempts": 0,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": "1990-01-01",
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [
+        "2026-03-12T10:00:00-05:00",
+        "2026-03-12T14:00:00-05:00"
+      ],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "My date of birth is 1990-01-01",
+      "decision": "proceed",
+      "last_response": "I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?"
+    }
+  },
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 5,
+    "caller_phone": null,
+    "patient_id": "P69505",
+    "patient_type": "unknown",
+    "intent": "schedule",
+    "intent_confidence": 0.6,
+    "verification_status": "unverified",
+    "verification_attempts": 0,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": "1990-01-01",
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [
+        "2026-03-12T10:00:00-05:00",
+        "2026-03-12T14:00:00-05:00"
+      ],
+      "selected_slot": "2026-03-12T10:00:00-05:00",
+      "appointment_id": "A20636",
+      "version": 1
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 1
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "Wednesday morning works",
+      "decision": "proceed",
+      "last_response": "You're all set. I have confirmed your appointment and sent a text message."
+    }
+  },
+  {
+    "session_id": "EXPORT-1",
+    "turn_id": 6,
+    "caller_phone": null,
+    "patient_id": "P69505",
+    "patient_type": "unknown",
+    "intent": "report",
+    "intent_confidence": 0.75,
+    "verification_status": "failed",
+    "verification_attempts": 1,
+    "collected_fields": {
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "dob": "1990-01-01",
+      "email": null,
+      "insurance_provider": null,
+      "insurance_member_id": null,
+      "reason_for_visit": null
+    },
+    "appointment_context": {
+      "provider_id": null,
+      "department": null,
+      "slot_candidates": [],
+      "selected_slot": null,
+      "appointment_id": null,
+      "version": 2
+    },
+    "report_context": {
+      "report_id": null,
+      "report_type": null,
+      "report_text": null,
+      "summary": null,
+      "version": 2
+    },
+    "handoff_reason": null,
+    "last_agent": "task",
+    "errors": [],
+    "meta": {
+      "text": "Actually, can you tell me my lab results?",
+      "decision": "proceed",
+      "last_response": "Please provide your date of birth so I can verify your identity."
+    }
+  }
+]</pre>
+</body>
+</html>

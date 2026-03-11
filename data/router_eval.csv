@@ -1,0 +1,11 @@
+text,intent
+I want to schedule an appointment,schedule
+I need to change my appointment,reschedule
+Please cancel my appointment,cancel
+Can you explain my lab results,report
+I need to update my insurance,insurance
+I want to register as a new patient,registration
+I need to move my visit to next week,reschedule
+Cancel my visit for Friday,cancel
+I need my test results,report
+I want to book a checkup,schedule

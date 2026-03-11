@@ -1,0 +1,476 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Trace Swimlane</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { font-size: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 6px; vertical-align: top; }
+    th { background: #f4f4f4; text-align: left; }
+    .lane { width: 140px; font-weight: bold; background: #fafafa; }
+    .event { display: inline-block; margin: 3px 4px 0 0; padding: 4px 6px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+    .router { background: #d7e6ff; }
+    .supervisor { background: #ffe1c6; }
+    .task { background: #d7f5d7; }
+    .context { background: #e1e1ff; }
+    .audit { background: #ffe1f2; }
+    .hook { background: #f6f0c1; }
+    .diff { background: #e6f7ef; }
+    .merge { background: #ffd8d8; }
+    .duration { background: #e8f0ff; }
+    .response { background: #fff3cd; }
+    .small { font-size: 10px; color: #444; }
+    .controls { margin: 10px 0; }
+    .controls label { margin-right: 8px; }
+    .hidden { display: none; }
+    #detail { margin-top: 12px; padding: 8px; background: #f6f6f6; border: 1px solid #ddd; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Trace Swimlane (By Turn)</h1>
+
+  <div class="controls">
+    <label><input class="lane-filter" type="checkbox" value="router" checked> router</label><label><input class="lane-filter" type="checkbox" value="supervisor" checked> supervisor</label><label><input class="lane-filter" type="checkbox" value="task" checked> task</label><label><input class="lane-filter" type="checkbox" value="context" checked> context</label><label><input class="lane-filter" type="checkbox" value="audit" checked> audit</label><label><input class="lane-filter" type="checkbox" value="langgraph" checked> langgraph</label><label><input class="lane-filter" type="checkbox" value="hook" checked> hook</label><label><input class="lane-filter" type="checkbox" value="diff" checked> diff</label><label><input class="lane-filter" type="checkbox" value="merge" checked> merge</label><label><input class="lane-filter" type="checkbox" value="duration" checked> duration</label><label><input class="lane-filter" type="checkbox" value="response" checked> response</label>
+    <label><input type="checkbox" id="toggle-empty" checked> Show empty lanes</label>
+  </div>
+
+  <table id="swimlane">
+    <thead>
+      <tr>
+        <th>Lane</th>
+        <th>Turn 1</th><th>Turn 2</th><th>Turn 3</th><th>Turn 4</th><th>Turn 5</th><th>Turn 6</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-lane="router" data-has-events="false"><td class="lane">router</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="supervisor" data-has-events="false"><td class="lane">supervisor</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="task" data-has-events="true"><td class="lane">task</td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your first name, last name, date of birth.&quot;
+}">task_response</span></td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your last name, date of birth.&quot;
+}">task_response</span></td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your date of birth.&quot;
+}">task_response</span></td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?&quot;
+}">task_response</span></td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;You're all set. I have confirmed your appointment and sent a text message.&quot;
+}">task_response</span></td><td><span class="event task" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please provide your date of birth so I can verify your identity.&quot;
+}">task_response</span></td></tr>
+<tr data-lane="context" data-has-events="false"><td class="lane">context</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="audit" data-has-events="false"><td class="lane">audit</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="langgraph" data-has-events="true"><td class="lane">langgraph</td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 1.394
+}">langgraph=1.394ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;intent&quot;: &quot;schedule&quot;,
+    &quot;intent_confidence&quot;: 0.75,
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;report_context&quot;: {
+      &quot;report_id&quot;: null,
+      &quot;report_type&quot;: null,
+      &quot;report_text&quot;: null,
+      &quot;summary&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;last_agent&quot;: &quot;task&quot;,
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;I want to schedule an appointment&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your first name, last name, date of birth.&quot;
+    }
+  }
+}">diff</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.884
+}">langgraph=0.884ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_type&quot;: &quot;new&quot;,
+    &quot;intent_confidence&quot;: 0.6,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: null,
+      &quot;dob&quot;: null,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My first name is Jane&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your last name, date of birth.&quot;
+    }
+  }
+}">diff</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.777
+}">langgraph=0.777ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_type&quot;: &quot;existing&quot;,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: &quot;Doe&quot;,
+      &quot;dob&quot;: null,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My last name is Doe&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your date of birth.&quot;
+    }
+  }
+}">diff</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 2.08
+}">langgraph=2.08ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_id&quot;: &quot;P69505&quot;,
+    &quot;patient_type&quot;: &quot;unknown&quot;,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: &quot;Doe&quot;,
+      &quot;dob&quot;: &quot;1990-01-01&quot;,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [
+        &quot;2026-03-12T10:00:00-05:00&quot;,
+        &quot;2026-03-12T14:00:00-05:00&quot;
+      ],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My date of birth is 1990-01-01&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?&quot;
+    }
+  }
+}">diff</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 1.164
+}">langgraph=1.164ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [
+        &quot;2026-03-12T10:00:00-05:00&quot;,
+        &quot;2026-03-12T14:00:00-05:00&quot;
+      ],
+      &quot;selected_slot&quot;: &quot;2026-03-12T10:00:00-05:00&quot;,
+      &quot;appointment_id&quot;: &quot;A20636&quot;,
+      &quot;version&quot;: 1
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;Wednesday morning works&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;You're all set. I have confirmed your appointment and sent a text message.&quot;
+    }
+  }
+}">diff</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.752
+}">langgraph=0.752ms</span><span class="event context" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;intent&quot;: &quot;report&quot;,
+    &quot;intent_confidence&quot;: 0.75,
+    &quot;verification_status&quot;: &quot;failed&quot;,
+    &quot;verification_attempts&quot;: 1,
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 2
+    },
+    &quot;report_context&quot;: {
+      &quot;report_id&quot;: null,
+      &quot;report_type&quot;: null,
+      &quot;report_text&quot;: null,
+      &quot;summary&quot;: null,
+      &quot;version&quot;: 2
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;Actually, can you tell me my lab results?&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please provide your date of birth so I can verify your identity.&quot;
+    }
+  }
+}">diff</span></td></tr>
+<tr data-lane="hook" data-has-events="false"><td class="lane">hook</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="diff" data-has-events="true"><td class="lane">diff</td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;intent&quot;: &quot;schedule&quot;,
+    &quot;intent_confidence&quot;: 0.75,
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;report_context&quot;: {
+      &quot;report_id&quot;: null,
+      &quot;report_type&quot;: null,
+      &quot;report_text&quot;: null,
+      &quot;summary&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;last_agent&quot;: &quot;task&quot;,
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;I want to schedule an appointment&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your first name, last name, date of birth.&quot;
+    }
+  }
+}">langgraph: intent, intent_confidence, appointment_context, report_context, last_agent, meta</span></td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_type&quot;: &quot;new&quot;,
+    &quot;intent_confidence&quot;: 0.6,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: null,
+      &quot;dob&quot;: null,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My first name is Jane&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your last name, date of birth.&quot;
+    }
+  }
+}">langgraph: patient_type, intent_confidence, collected_fields, meta</span></td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_type&quot;: &quot;existing&quot;,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: &quot;Doe&quot;,
+      &quot;dob&quot;: null,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My last name is Doe&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please tell me your date of birth.&quot;
+    }
+  }
+}">langgraph: patient_type, collected_fields, meta</span></td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;patient_id&quot;: &quot;P69505&quot;,
+    &quot;patient_type&quot;: &quot;unknown&quot;,
+    &quot;collected_fields&quot;: {
+      &quot;first_name&quot;: &quot;Jane&quot;,
+      &quot;last_name&quot;: &quot;Doe&quot;,
+      &quot;dob&quot;: &quot;1990-01-01&quot;,
+      &quot;email&quot;: null,
+      &quot;insurance_provider&quot;: null,
+      &quot;insurance_member_id&quot;: null,
+      &quot;reason_for_visit&quot;: null
+    },
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [
+        &quot;2026-03-12T10:00:00-05:00&quot;,
+        &quot;2026-03-12T14:00:00-05:00&quot;
+      ],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 1
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;My date of birth is 1990-01-01&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?&quot;
+    }
+  }
+}">langgraph: patient_id, patient_type, collected_fields, appointment_context, meta</span></td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [
+        &quot;2026-03-12T10:00:00-05:00&quot;,
+        &quot;2026-03-12T14:00:00-05:00&quot;
+      ],
+      &quot;selected_slot&quot;: &quot;2026-03-12T10:00:00-05:00&quot;,
+      &quot;appointment_id&quot;: &quot;A20636&quot;,
+      &quot;version&quot;: 1
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;Wednesday morning works&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;You're all set. I have confirmed your appointment and sent a text message.&quot;
+    }
+  }
+}">langgraph: appointment_context, meta</span></td><td><span class="event diff" data-payload="{
+  &quot;event&quot;: &quot;state_diff&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;diff&quot;: {
+    &quot;intent&quot;: &quot;report&quot;,
+    &quot;intent_confidence&quot;: 0.75,
+    &quot;verification_status&quot;: &quot;failed&quot;,
+    &quot;verification_attempts&quot;: 1,
+    &quot;appointment_context&quot;: {
+      &quot;provider_id&quot;: null,
+      &quot;department&quot;: null,
+      &quot;slot_candidates&quot;: [],
+      &quot;selected_slot&quot;: null,
+      &quot;appointment_id&quot;: null,
+      &quot;version&quot;: 2
+    },
+    &quot;report_context&quot;: {
+      &quot;report_id&quot;: null,
+      &quot;report_type&quot;: null,
+      &quot;report_text&quot;: null,
+      &quot;summary&quot;: null,
+      &quot;version&quot;: 2
+    },
+    &quot;meta&quot;: {
+      &quot;text&quot;: &quot;Actually, can you tell me my lab results?&quot;,
+      &quot;decision&quot;: &quot;proceed&quot;,
+      &quot;last_response&quot;: &quot;Please provide your date of birth so I can verify your identity.&quot;
+    }
+  }
+}">langgraph: intent, intent_confidence, verification_status, verification_attempts, appointment_context, report_context, meta</span></td></tr>
+<tr data-lane="merge" data-has-events="false"><td class="lane">merge</td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td><td><span class=\"small\">-</span></td></tr>
+<tr data-lane="duration" data-has-events="true"><td class="lane">duration</td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 1.394
+}">langgraph=1.394ms</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.884
+}">langgraph=0.884ms</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.777
+}">langgraph=0.777ms</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 2.08
+}">langgraph=2.08ms</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 1.164
+}">langgraph=1.164ms</span></td><td><span class="event duration" data-payload="{
+  &quot;event&quot;: &quot;node_duration&quot;,
+  &quot;agent&quot;: &quot;langgraph&quot;,
+  &quot;ms&quot;: 0.752
+}">langgraph=0.752ms</span></td></tr>
+<tr data-lane="response" data-has-events="true"><td class="lane">response</td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your first name, last name, date of birth.&quot;
+}">Please tell me your first name, last name, date of birth.</span></td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your last name, date of birth.&quot;
+}">Please tell me your last name, date of birth.</span></td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please tell me your date of birth.&quot;
+}">Please tell me your date of birth.</span></td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?&quot;
+}">I have 2026-03-12T10:00:00-05:00 or 2026-03-12T14:00:00-05:00. Which works for you?</span></td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;You're all set. I have confirmed your appointment and sent a text message.&quot;
+}">You're all set. I have confirmed your appointment and sent a text message.</span></td><td><span class="event response" data-payload="{
+  &quot;event&quot;: &quot;task_response&quot;,
+  &quot;response&quot;: &quot;Please provide your date of birth so I can verify your identity.&quot;
+}">Please provide your date of birth so I can verify your identity.</span></td></tr>
+    </tbody>
+  </table>
+
+  <div id="detail">Click an event to see details.</div>
+
+  <script>
+    const filters = document.querySelectorAll('.lane-filter');
+    const toggleEmpty = document.getElementById('toggle-empty');
+
+    function applyFilters() {
+      const active = new Set(Array.from(filters).filter(f => f.checked).map(f => f.value));
+      document.querySelectorAll('tr[data-lane]').forEach(row => {
+        const lane = row.getAttribute('data-lane');
+        const hasEvents = row.getAttribute('data-has-events') === 'true';
+        const showLane = active.has(lane) && (toggleEmpty.checked || hasEvents);
+        row.style.display = showLane ? '' : 'none';
+      });
+    }
+
+    filters.forEach(f => f.addEventListener('change', applyFilters));
+    toggleEmpty.addEventListener('change', applyFilters);
+    applyFilters();
+
+    document.querySelectorAll('.event').forEach(el => {
+      el.addEventListener('click', () => {
+        const payload = el.getAttribute('data-payload');
+        document.getElementById('detail').textContent = payload || 'No details';
+      });
+    });
+  </script>
+</body>
+</html>
